@@ -20,6 +20,8 @@ It's a plain static site with no build step and no dependencies. Open `index.htm
 | Room | What happens |
 |---|---|
 | **Grand Entrance** | Golden gates swing open |
+| **Our Journey** 🎬 | Animated story starring cartoon Pingu & Motu: the silent classroom, the basketball invite, mid-March hand-holding, the white rose at First Coffee, Bigg Boss nights, then walking into the museum. Plays after the gates the first time; replayable from the map |
+| **The Basketball Court** 🏀 | Mini-game: tap Shoot when the line is in the green zone. Every basket shows a message |
 | **The Royal Map** | Hub with every hall. Cartographer's notes hold subtle clues |
 | **Hall of Portraits** | Gilded frames on crimson walls, with cinematic lightbox |
 | **Gallery of Little Moments** | Swaying polaroids. Tap to flip and read the back |
@@ -32,6 +34,8 @@ It's a plain static site with no build step and no dependencies. Open `index.htm
 | **The Locked Room** 💌 | Golden door → wax seal breaks → letter unfolds |
 | **The Throne Room** | The final royal decree, sealed until every secret is found |
 
+Cartoon Pingu & Motu also follow her from room to room, saying something in each one. Tap them for more. All their lines, the Journey captions and the court messages are editable in `js/content.js`.
+
 ## 🔑 The secret adventure (optional; every gallery stays open)
 
 1. **The Cartographer's Note:** a tiny "here be Muskan" heart in the map's margin.
@@ -39,7 +43,8 @@ It's a plain static site with no build step and no dependencies. Open `index.htm
 3. **The Locked Love Letter:** the key opens the golden door.
 4. **The Crown Star:** the newspaper's classifieds describe a lost rose-gold star in the Hall of Stars.
 5. **A Wish in the Well:** a coin glints in the garden beyond the walls.
+6. **Nothing but Net:** score a basket on the court.
 
-Finding all five opens **The Throne Room**. The crown badge (top-right) tracks how much of the kingdom she has explored and gives gentle hints. Progress is saved in her browser.
+Finding all six opens **The Throne Room**. The crown badge (top-right) tracks how much of the kingdom she has explored and gives gentle hints. Progress is saved in her browser.
 
 To reset progress while testing, run `localStorage.removeItem("royal-museum-muskan-v1")` in the browser console.

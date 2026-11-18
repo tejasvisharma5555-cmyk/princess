@@ -46,7 +46,7 @@ window.KINGDOM = {
   moments: [
     { src: "assets/photos/moment-2.jpg", front: "head on my shoulder",    back: "You put your head on my shoulder in the middle of a shop and I forgot what we came to buy.", pos: "50% 40%" },
     { src: "assets/photos/moment-3.jpg", front: "late night, us",         back: "Bad lighting, sleepy faces, probably right after Bigg Boss. One of my favourite photos ever.", pos: "50% 50%" },
-    { src: "assets/photos/first-flower.jpg", front: "the first flower ✿", back: "22 May 2026. Our first coffee, at night, in Chitkara. One little white rose, and the start of a lifetime of flowers.", pos: "50% 50%" },
+    { src: "assets/photos/first-flower.jpg", front: "the first flower ✿", back: "22 May 2026. That night at First Coffee in Chitkara. One little white rose, and the start of a lifetime of flowers.", pos: "50% 50%" },
     { src: "assets/photos/moment-4.jpg", front: "pingu & motu",           back: "Leather jacket Motu and her very lucky Pingu.", pos: "50% 50%" },
     { src: "assets/photos/moment-6.jpg", front: "work mode: ON",          back: "No makeup, messy hair, totally focused. Still the prettiest person I know. Don't argue (you'll win, but don't).", pos: "50% 30%" },
     { src: "assets/photos/moment-5.jpg", front: "just us 🤍",             back: "Some moments are just ours. This is one of them.", pos: "50% 40%" },
@@ -62,7 +62,7 @@ window.KINGDOM = {
     { chapter: "Chapter I",   date: "1.5 years of silence", title: "Classmates Who Never Spoke",  src: "assets/photos/portrait-4.jpg", pos: "50% 62%", text: "One and a half years in the same class. Same lectures, same teachers, same boring days, and we never said a single word to each other. Not one. You were right there the whole time and I had no idea. Biggest waste of time in history, honestly." },
     { chapter: "Chapter II",  date: "The day it began",     title: "The Basketball Invitation",   src: "assets/photos/moment-4.jpg",   pos: "50% 45%", text: "Then one day I just asked: 'Want to play basketball?' Best question I've ever asked anyone. After that we played every single day, all through our hostel days. I don't think I even cared about the score. I just wanted those evenings with you." },
     { chapter: "Chapter III", date: "Mid-March",            title: "It Became Us",                src: "assets/photos/portrait-3.jpg", pos: "50% 60%", text: "Somewhere in mid-March, it stopped being 'me and her' and became 'us'. And then the first time I held your hand. I was so nervous, and you just held it back like it was the most normal thing in the world. I'll never forget that moment. Ever." },
-    { chapter: "Chapter IV",  date: "22 May 2026",          title: "The First Flower",            src: "assets/photos/first-flower.jpg", pos: "50% 50%", text: "Our first coffee, at night, in Chitkara. And I gave you your first flower: a little white rose. Not the fanciest flower in the world, but I've never been prouder of anything I've held. I still remember your face when you took it. If I could, I'd frame that exact second and hang it in the centre of this museum." },
+    { chapter: "Chapter IV",  date: "22 May 2026",          title: "The First Flower",            src: "assets/photos/first-flower.jpg", pos: "50% 50%", text: "That night at First Coffee, the café in Chitkara. And I gave you your first flower: a little white rose. Not the fanciest flower in the world, but I've never been prouder of anything I've held. I still remember your face when you took it. If I could, I'd frame that exact second and hang it in the centre of this museum." },
     { chapter: "Chapter V",   date: "Now",                  title: "Pingu & Motu, Under One Roof", src: "assets/photos/chronicle-3.jpg", pos: "50% 45%", text: "Now we live together. You come home from your internship, we put on Bigg Boss, there's junk food everywhere, you call me 'baabbuuuu' in that funny voice, I call you Motu (every time), and you win whatever argument we're having. Best days of my life. No competition." },
     { chapter: "Chapter VI",  date: "Coming soon",          title: "The Whole World",             src: "assets/photos/portrait-1.jpg", pos: "50% 40%", text: "And next? We travel the world together. Every mountain, every city, every beach, every street food stall (you'll want all of them). The story is still being written, Motu, and I can't wait to write every page of it with you." }
   ],
@@ -111,7 +111,7 @@ window.KINGDOM = {
       "LOST: One small star, the brightest in the sky, glowing rose-gold and shaped like a tiny crown. Last seen in the HALL OF A THOUSAND STARS, hiding among the ordinary ones. Finder will know it when they see it. ✦",
       "FOR SALE: Pingu's hoodie. Just kidding. Motu already took it.",
       "NOTICE: The junk food cupboard has been restocked. The princess will share it anyway, because she shares everything. The kingdom is baffled.",
-      "ANNOUNCEMENT: Flower count officially started 22 May 2026, with one white rose at a late-night coffee in Chitkara. The king plans to never stop counting."
+      "ANNOUNCEMENT: Flower count officially started 22 May 2026, with one white rose at First Coffee, Chitkara, late at night. The king plans to never stop counting."
     ],
     extraHeadlines: [
       "Princess Says 'Baabbuuuu' — Kingdom Holds Breath",
@@ -143,7 +143,7 @@ window.KINGDOM = {
       "That you said yes to a random basketball game.",
       "All those evenings on the court back in hostel days.",
       "The first time you held my hand.",
-      "Our first coffee in Chitkara at night, and your face when I gave you that little white rose.",
+      "That night at First Coffee in Chitkara, and your face when I gave you that little white rose.",
       "Coming home to you.",
       "How hard you work at your internship and still have time for me.",
       "The way your smile changes my entire day.",
@@ -247,7 +247,7 @@ window.KINGDOM = {
     memories: [
       "Do you realise we sat in the same class for one and a half years and never talked? Not even once. I still can't believe I wasted all that time. And then one day I asked you to play basketball. Honestly, the best question I've ever asked anyone.",
       "After that it was basketball every single day, all through hostel. I don't think I even cared about the game. I just wanted those evenings with you.",
-      "Then mid-March happened, and suddenly it was us. I'll never forget the first time I held your hand. I was so nervous, and you just held it back like it was the most normal thing in the world. I think about that moment more than you know. And 22 May: our first coffee, at night in Chitkara, and the first flower I ever gave you. A little white rose. I still remember your face.",
+      "Then mid-March happened, and suddenly it was us. I'll never forget the first time I held your hand. I was so nervous, and you just held it back like it was the most normal thing in the world. I think about that moment more than you know. And 22 May: that night at First Coffee in Chitkara, and the first flower I ever gave you. A little white rose. I still remember your face.",
       "Now we live together. You come back from your internship, we put on Bigg Boss, there's junk food everywhere, you call me 'baabbuuuu' in that funny voice and I just start laughing. These are honestly the best days of my life."
     ],
 
@@ -288,6 +288,79 @@ window.KINGDOM = {
       "Long live Princess Muskan. Long live my Motu. Long live the one who made a king out of an ordinary Pingu."
     ],
     signature: "— With all my love, now and always,"
+  },
+
+  /* ---------------------------------------------------------------
+     OUR JOURNEY  🎬  (the animated story that plays after the gates open)
+     --------------------------------------------------------------- */
+  journey: {
+    title: "Our Journey",
+    subtitle: "Starring Pingu & Motu",
+    board: "Same class · 1.5 years · 0 words 🤐",
+    scenes: [
+      { date: "1.5 years of silence",                  text: "Same class. Same lectures. One and a half years… and not a single word." },
+      { date: "The day it began",                      text: "Then one day, Pingu found his courage. After that: basketball every single day, all through hostel." },
+      { date: "Mid-March",                             text: "It became us. And the first time I held your hand, I didn't want to let go." },
+      { date: "22 May 2026 · First Coffee, Chitkara",  text: "A late night, a little white rose, and the first flower I ever gave you." },
+      { date: "Now",                                   text: "One home. Bigg Boss nights. Junk food everywhere. And a lot of 'baabbuuuu'." },
+      { date: "And then…",                             text: "He built her a whole kingdom. Come in, Your Highness." }
+    ],
+    lines: {
+      silence: "…",
+      ask: "Wanna play basketball? 🏀",
+      yes: "Okay! 😊",
+      rose: "This is for you ✿",
+      roseReply: "Pingu… 🥹",
+      babu: "baabbuuuu! 😆",
+      babuReply: "Haan Motu? 😂",
+      museum: "Pingu… what is this?!",
+      museumReply: "Your kingdom, Motu 👑"
+    }
+  },
+
+  /* ---------------------------------------------------------------
+     THE BASKETBALL COURT  🏀  (mini-game — a message appears per basket)
+     --------------------------------------------------------------- */
+  court: {
+    title: "The Basketball Court",
+    subtitle: "Where it all began",
+    lede: "This is where Pingu shot his shot. Now it's your turn, Motu.",
+    messages: [
+      "Swish! Just like the day I asked you to play basketball. Best shot I ever took. 🏀",
+      "Nothing but net. Just like how nothing but you is on my mind.",
+      "You score every time. Especially in arguments. 😌",
+      "That one went straight into my heart, Motu.",
+      "The hostel-days champion is back! 🏆",
+      "Okay, show-off. Still not as impressive as your laugh.",
+      "Three points for you, unlimited cuddles for me? Deal.",
+      "Even the hoop can't resist you. Same, honestly."
+    ],
+    cheers: ["Wooo! That's my Motu! 🎉", "Swish!! 😍", "Unstoppable!", "MVP! 🏆"],
+    misses: ["So close! Again 😄", "The rim got shy. Try again!", "That was a warm-up, right?", "Still amazing 🫶"]
+  },
+
+  /* ---------------------------------------------------------------
+     THE TWO OF YOU, FOLLOWING HER AROUND THE MUSEUM
+     Each room: list of [who, line]. "who" is "pingu" or "motu".
+     --------------------------------------------------------------- */
+  buddies: {
+    rooms: {
+      map:        [["motu", "Pingu, where do we go first?"], ["pingu", "Wherever you want, Motu."]],
+      portraits:  [["pingu", "Honestly? She's prettier in person."]],
+      moments:    [["motu", "Who allowed THAT photo?! 😤"], ["pingu", "Me. The king."]],
+      chronicles: [["pingu", "1.5 years of not talking. Never again."]],
+      times:      [["motu", "Who writes this newspaper?!"], ["pingu", "…no comment."]],
+      stars:      [["pingu", "Every single one of these is about you."]],
+      records:    [["motu", "Unlimited junk food is legally binding now."]],
+      library:    [["pingu", "Rule 8 is very unfair."], ["motu", "Rule 8 stays."]],
+      garden:     [["motu", "Make a wish, baabbuuuu!"]],
+      letter:     [["pingu", "Read this one slowly, okay?"]],
+      throne:     [["motu", "Long live… me? 👑"], ["pingu", "Always."]]
+    },
+    random: {
+      pingu: ["Motu, snacks? 🍟", "Bigg Boss tonight?", "I love you 🤍", "Race you to the next room!", "Khat on repeat?", "Motu!!"],
+      motu:  ["baabbuuuu! 😆", "Stop staring, Pingu.", "I'm hungry.", "I won that argument btw.", "Hehe 🤭", "Pingu!!"]
+    }
   },
 
   /* ---------------------------------------------------------------

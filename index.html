@@ -11,6 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Caveat:wght@500;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/characters.css">
 </head>
 <body>
   <!-- ============ HUD ============ -->
@@ -50,7 +51,9 @@
   <!-- ============ ROOMS ============ -->
   <main id="kingdom">
     <section class="room room-entrance" data-room="entrance" aria-label="The Grand Entrance"></section>
+    <section class="room room-journey" data-room="journey" aria-label="Our Journey"></section>
     <section class="room room-map" data-room="map" aria-label="The Royal Map"></section>
+    <section class="room room-court" data-room="court" aria-label="The Basketball Court"></section>
     <section class="room room-portraits" data-room="portraits" aria-label="Hall of Portraits"></section>
     <section class="room room-moments" data-room="moments" aria-label="Gallery of Little Moments"></section>
     <section class="room room-chronicles" data-room="chronicles" aria-label="The Royal Chronicles"></section>
@@ -69,6 +72,7 @@
       <svg viewBox="0 0 64 64"><path d="M10 46 L13 22 L24 33 L32 16 L40 33 L51 22 L54 46 Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
       <span id="veilLabel"></span>
     </div>
+    <div class="veil-walk" id="veilWalk"></div>
   </div>
 
   <!-- Lightbox -->
@@ -107,6 +111,7 @@
   </svg>
 
   <script src="js/content.js"></script>
+  <script src="js/characters.js"></script>
   <script src="js/app.js"></script>
 </body>
 </html>

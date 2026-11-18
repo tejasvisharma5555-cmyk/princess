@@ -21,6 +21,8 @@
   const save = () => { try { localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* ignore */ } };
 
   const GALLERIES = [
+    { id: "journey",    name: "Our Journey" },
+    { id: "court",      name: "The Basketball Court" },
     { id: "portraits",  name: "Hall of Portraits" },
     { id: "moments",    name: "Gallery of Little Moments" },
     { id: "chronicles", name: "The Royal Chronicles" },
@@ -35,7 +37,8 @@
     { id: "key",       name: "The Golden Key",          hint: "Some portraits hide more than faces." },
     { id: "letter",    name: "The Locked Love Letter",  hint: "A golden door waits for a golden key." },
     { id: "crownstar", name: "The Crown Star",          hint: "Read the classifieds in The Muskan Times." },
-    { id: "wish",      name: "A Wish in the Well",      hint: "A coin glints in the garden beyond the walls." }
+    { id: "wish",      name: "A Wish in the Well",      hint: "A coin glints in the garden beyond the walls." },
+    { id: "basket",    name: "Nothing but Net",         hint: "Take a shot on the court where it all began." }
   ];
   const LABELS = { entrance: "The Grand Entrance", map: "The Royal Map", letter: "The Locked Room", throne: "The Throne Room" };
   GALLERIES.forEach(g => LABELS[g.id] = g.name);
@@ -147,6 +150,8 @@
     smile: '<circle cx="24" cy="24" r="16"/><circle cx="18" cy="20" r="1.6"/><circle cx="30" cy="20" r="1.6"/><path d="M16 27c3 6 13 6 16 0"/>',
     glass: '<circle cx="20" cy="20" r="10"/><path d="M27 27l12 12"/><path d="M15 17a6 6 0 016-4"/>',
     trophy: '<path d="M16 8h16v10a8 8 0 01-16 0z"/><path d="M16 11h-5c0 6 3 8 6 8M32 11h5c0 6-3 8-6 8"/><path d="M24 26v6"/><path d="M17 40h14l-2-8H19z"/>',
+    ball: '<circle cx="24" cy="24" r="15"/><path d="M9 24h30M24 9v30M13 13c6 6 6 16 0 22M35 13c-6 6-6 16 0 22"/>',
+    film: '<rect x="7" y="11" width="34" height="26" rx="3"/><path d="M7 17h34M7 31h34M12 11v6M18 11v6M24 11v6M30 11v6M36 11v6M12 31v6M18 31v6M24 31v6M30 31v6M36 31v6"/><path d="M21 21l7 3-7 3z"/>',
     hand: '<path d="M16 40c-4-4-6-10-6-14l2-2 4 4V12a2 2 0 014 0v10V8a2 2 0 014 0v14V10a2 2 0 014 0v12-6a2 2 0 014 0v12c0 6-2 10-6 12z"/>'
   };
   const icon = (name, cls = "") => `<svg class="illo ${cls}" viewBox="0 0 48 48" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">${ICON[name] || ICON.crown}</svg>`;
@@ -176,6 +181,8 @@
     current = id;
     document.body.dataset.room = id;
     if (ENTER[id]) ENTER[id](room);
+    setupReveals(room);
+    buddiesEnter(id);
     if (GALLERIES.some(g => g.id === id) && !has("visited", id)) { state.visited.push(id); save(); }
     if (id === "throne" && allSecrets() && !has("visited", "throne")) { state.visited.push("throne"); save(); }
     updateProgress();
@@ -267,7 +274,7 @@
       room.classList.add("opening");
       if (music && state.sound) music.play().catch(() => {});
       await wait(1700);
-      go("map");
+      go(has("visited", "journey") ? "map" : "journey");
       setTimeout(() => room.classList.remove("opening"), 900);
     });
   };
@@ -278,7 +285,9 @@
     { id: "moments",    icon: "polaroid",  x: 38, y: 15, note: "Small moments, big feelings" },
     { id: "chronicles", icon: "scroll",    x: 62, y: 16, note: "Where our story is kept" },
     { id: "times",      icon: "paper",     x: 84, y: 26, note: "Read the news before you count the stars" },
-    { id: "stars",      icon: "telescope", x: 84, y: 60, note: "One star wears a crown" },
+    { id: "stars",      icon: "telescope", x: 84, y: 65, note: "One star wears a crown" },
+    { id: "court",      icon: "ball",      x: 85, y: 45, note: "Where it all began · take a shot" },
+    { id: "journey",    icon: "film",      x: 16, y: 49, note: "Watch our story come to life" },
     { id: "records",    icon: "seal",      x: 62, y: 66, note: "Official business only" },
     { id: "library",    icon: "book",      x: 37, y: 62, note: "Laws of the realm" },
     { id: "garden",     icon: "fountain",  x: 14, y: 72, note: "Beyond the walls, a coin glints" },
@@ -955,13 +964,13 @@
       await wait(700); env.classList.add("flap-open");
       await wait(800); env.classList.add("rise");
       await wait(1000);
-      room.classList.add("reading");
+      room.classList.add("reading"); document.body.classList.add("reading");
       letter.classList.add("unfold");
       $$(".ll-body p, .ll-salute, .ll-closing, .ll-sign, .ll-orn, .ll-photo", room).forEach((p, i) => p.style.setProperty("--d", (1.4 + i * 0.35) + "s"));
       discover("letter");
     });
     $("#refold", room).addEventListener("click", () => {
-      room.classList.remove("reading"); letter.classList.remove("unfold");
+      room.classList.remove("reading"); document.body.classList.remove("reading"); letter.classList.remove("unfold");
       env.classList.remove("broken", "flap-open", "rise");
       $("#envHint", room).textContent = "Resealed — open it again whenever you need it.";
       room.scrollTop = 0;
@@ -1015,6 +1024,325 @@
       </div>`;
     sfx.fanfare();
   };
+
+
+  /* ==================================================================
+     ANIMATION KIT — characters, stages, arcs
+     ================================================================== */
+  const pct = (n, d) => (n / d) * 100;
+  function arc(el, x0, y0, x1, y1, lift, ms, run, isLive) {
+    return new Promise((res, rej) => {
+      const t0 = performance.now(), top = Math.max(y0, y1) + lift;
+      const step = now => {
+        if (isLive && !isLive(run)) return rej("stop");
+        const t = Math.min(1, (now - t0) / (reduceMotion ? 1 : ms));
+        const x = x0 + (x1 - x0) * t;
+        const base = y0 + (y1 - y0) * t;
+        const y = base + 4 * (top - Math.max(y0, y1)) * t * (1 - t);
+        el.style.left = x + "%"; el.style.bottom = y + "%";
+        t < 1 ? requestAnimationFrame(step) : res();
+      };
+      requestAnimationFrame(step);
+    });
+  }
+  function popHearts(stage, x, y, n = 5) {
+    for (let i = 0; i < n; i++) {
+      const h = document.createElement("span");
+      h.className = "pop-heart"; h.textContent = i % 3 ? "♥" : "💗";
+      h.style.left = x + (Math.random() * 8 - 4) + "%"; h.style.bottom = y + "%";
+      h.style.setProperty("--dx", (Math.random() * 60 - 30) + "px");
+      h.style.animationDelay = (i * 0.12) + "s";
+      stage.appendChild(h); setTimeout(() => h.remove(), 2400);
+    }
+  }
+  function handPos(stage, c, side = "r") {
+    const s = stage.getBoundingClientRect(), r = c.getBoundingClientRect();
+    return { x: pct((side === "r" ? r.left + r.width * 0.72 : r.left + r.width * 0.28) - s.left, s.width), y: pct(s.bottom - (r.top + r.height * 0.7), s.height) };
+  }
+  function rimPos(stage) {
+    const s = stage.getBoundingClientRect(), r = $(".rim", stage).getBoundingClientRect();
+    return { x: pct(r.left + r.width / 2 - s.left, s.width), y: pct(s.bottom - r.top, s.height) };
+  }
+  const hoopHTML = `<div class="sun"></div><div class="fence"></div><div class="floor"></div><div class="hoop"><div class="pole"></div><div class="board"></div><div class="rim"></div><div class="net"></div></div>`;
+
+  /* ---------------- OUR JOURNEY ---------------- */
+  let jRun = 0;
+  const jLive = run => run === jRun;
+  RENDER.journey = room => {
+    const J = K.journey;
+    room.innerHTML = `
+      ${backBar(J.title, J.subtitle)}
+      <div class="stage" id="jStage"></div>
+      <p class="journey-caption" id="jCap"></p>
+      <div class="journey-dots" aria-hidden="true">${J.scenes.map(() => "<i></i>").join("")}</div>
+      <div class="journey-controls">
+        <button class="btn-ghost journey-skip" data-go="map">Skip to the museum →</button>
+        <button class="btn-royal small journey-end" data-go="map">Enter the Museum</button>
+        <button class="btn-ghost journey-end" id="jReplay">↺ Watch again</button>
+      </div>`;
+    $("#jReplay", room).addEventListener("click", () => { sfx.click(); playJourney(room); });
+  };
+  ENTER.journey = room => playJourney(room);
+  leaveHooks.journey = () => { jRun++; };
+
+  async function playJourney(room) {
+    const J = K.journey, L = J.lines, run = ++jRun;
+    const stage = $("#jStage", room), cap = $("#jCap", room), dots = $$(".journey-dots i", room);
+    room.classList.remove("done");
+    stage.innerHTML = "";
+    const sleep = ms => wait(ms).then(() => { if (!jLive(run)) throw "stop"; });
+    const P = Chars.make("pingu"), M = Chars.make("motu");
+    const reset = () => { P.className = "char char-pingu"; M.className = "char char-motu"; P.style.opacity = M.style.opacity = ""; };
+    const place = (c, x, y = 8) => { c.style.transition = "none"; c.style.left = x + "%"; c.style.bottom = y + "%"; void c.offsetWidth; c.style.transition = ""; };
+    const walk = async (c, x, ms) => {
+      c.classList.add("walking"); c.classList.toggle("flip", x < parseFloat(c.style.left));
+      c.style.transitionDuration = ms + "ms"; c.style.left = x + "%";
+      await sleep(ms); c.classList.remove("walking", "flip"); c.style.transitionDuration = "";
+    };
+    const say = async (c, text, ms = 1900) => {
+      const b = $(".bubble", c); b.textContent = text; b.classList.add("show"); tone(1200, 0, 0.12, 0.02, "triangle");
+      await sleep(ms); b.classList.remove("show"); await sleep(220);
+    };
+    const caption = i => {
+      const sc = J.scenes[i];
+      cap.innerHTML = `<span class="jc-date">${esc(sc.date)}</span><span class="jc-text">${esc(sc.text)}</span>`;
+      dots.forEach((d, k) => d.classList.toggle("on", k === i));
+    };
+    const scene = async (cls, html, setup) => {
+      const old = $(".scene.on", stage);
+      const sc = document.createElement("div");
+      sc.className = "scene " + cls; sc.innerHTML = html;
+      reset(); sc.append(P, M); stage.appendChild(sc);
+      setup && setup(sc);
+      requestAnimationFrame(() => sc.classList.add("on"));
+      if (old) { old.classList.remove("on"); setTimeout(() => old.remove(), 950); }
+      await sleep(1000);
+      return sc;
+    };
+
+    try {
+      /* 1 — classroom, 1.5 years of silence */
+      caption(0);
+      await scene("sc-classroom", `<div class="board">${esc(J.board)}</div><div class="clock"><i></i><i></i></div><div class="desk a"></div><div class="desk b"></div>`, () => {
+        place(P, window.innerWidth < 760 ? 20 : 18, 12); place(M, window.innerWidth < 760 ? 80 : 82, 12);
+        P.classList.add("sitting"); M.classList.add("sitting");
+      });
+      await sleep(900); await say(P, L.silence, 1200); await say(M, L.silence, 1200); await sleep(1400);
+
+      /* 2 — basketball court */
+      caption(1);
+      const court = await scene("sc-court", hoopHTML, () => { place(P, -12, 6); place(M, 58, 6); });
+      await walk(P, 38, 2200);
+      await say(P, L.ask, 2100);
+      await say(M, L.yes, 1500);
+      popHearts(stage, 50, 44, 4);
+      const ball = document.createElement("div"); ball.className = "ball"; ball.innerHTML = Chars.ballSVG; court.appendChild(ball);
+      let hp = handPos(stage, P, "r"), hm = handPos(stage, M, "l");
+      ball.style.left = hp.x + "%"; ball.style.bottom = hp.y + "%";
+      for (let i = 0; i < 2; i++) {
+        await arc(ball, hp.x, hp.y, hm.x, hm.y, 14, 650, run, jLive); sfx.page();
+        await arc(ball, hm.x, hm.y, hp.x, hp.y, 14, 650, run, jLive); sfx.page();
+      }
+      P.classList.add("shoot");
+      const rim = rimPos(stage);
+      await arc(ball, hp.x, hp.y + 6, rim.x, rim.y + 2, 26, 1000, run, jLive);
+      $(".hoop", court).classList.add("swish"); sfx.splash();
+      await arc(ball, rim.x, rim.y + 2, rim.x, 8, 0, 520, run, jLive);
+      ball.remove();
+      P.classList.remove("shoot"); P.classList.add("cheer"); M.classList.add("cheer");
+      popHearts(stage, 50, 50, 6);
+      await sleep(2200);
+
+      /* 3 — mid-March, holding hands */
+      caption(2);
+      const petals = Array.from({ length: 14 }, (_, i) => `<i style="--x:${(i * 41) % 100}%;--d:${5 + (i % 4)}s;--dl:${-i * 0.6}s"></i>`).join("");
+      await scene("sc-march", `<div class="ground"></div><div class="tree a"></div><div class="tree b"></div><div class="petal-fall">${petals}</div><div class="big-heart"><svg viewBox="0 0 32 32"><use href="#heart"/></svg></div>`, () => { place(P, 14, 8); place(M, 86, 8); });
+      const wPct = pct(P.offsetWidth, stage.offsetWidth);
+      const px = 50 - wPct * 0.43, mx = px + wPct * 0.86;
+      await Promise.all([walk(P, px, 2000), walk(M, mx, 2000)]);
+      P.classList.add("hold"); M.classList.add("hold-l", "blush");
+      await sleep(700);
+      $(".big-heart", stage).classList.add("show"); sfx.chime();
+      popHearts(stage, 50, 40, 6);
+      await sleep(3200);
+
+      /* 4 — First Coffee, Chitkara: the first flower */
+      caption(3);
+      await scene("sc-coffee", `<div class="stars-bg"></div><div class="moon2"></div><div class="cafe"><div class="sign">FIRST COFFEE<small>CHITKARA</small></div><div class="awning"></div><div class="win a"></div><div class="win b"></div><div class="door2"></div></div><div class="street"></div>`, () => { place(P, -12, 6); place(M, 62, 6); P.classList.add("with-rose"); });
+      await walk(P, 42, 2200);
+      P.classList.add("reach");
+      await say(P, L.rose, 1900);
+      P.classList.remove("with-rose", "reach"); M.classList.add("with-rose", "blush", "reach-l");
+      sfx.sparkle(); popHearts(stage, 57, 42, 7);
+      await say(M, L.roseReply, 2000);
+      await sleep(1000);
+
+      /* 5 — now: home, Bigg Boss, junk food, baabbuuuu */
+      caption(4);
+      await scene("sc-home", `<div class="lamp"></div><div class="tv"><span>BIGG BOSS<small>TONIGHT</small></span></div><div class="sofa-back"></div><div class="sofa"></div><div class="chips">CHIPS</div>`, () => {
+        const mob = window.innerWidth < 760;
+        place(P, mob ? 30 : 36, mob ? 12 : 14); place(M, mob ? 56 : 52, mob ? 12 : 14);
+        P.classList.add("sitting"); M.classList.add("sitting");
+      });
+      await sleep(800);
+      await say(M, L.babu, 1700);
+      P.classList.add("laugh"); M.classList.add("laugh");
+      popHearts(stage, 46, 40, 4);
+      await say(P, L.babuReply, 1700);
+      P.classList.remove("laugh"); M.classList.remove("laugh");
+      await sleep(900);
+
+      /* 6 — the museum */
+      caption(5);
+      const wins = [12, 22, 30, 68, 76, 86].map(x => `<div class="win3" style="left:${x}%"></div>`).join("");
+      const mus = await scene("sc-museum", `<div class="palace"></div>${wins}<div class="crown3"><svg viewBox="0 0 64 64"><use href="#crown"/></svg></div><div class="gate2"></div><div class="ground3"></div>`, () => { place(P, -14, 6); place(M, -4, 6); });
+      await Promise.all([walk(P, 38, 2400), walk(M, 50, 2400)]);
+      mus.classList.add("glow"); sfx.unlock();
+      await say(M, L.museum, 1900);
+      await say(P, L.museumReply, 2100);
+      P.classList.add("hold"); M.classList.add("hold-l");
+      await sleep(400);
+      P.style.transition = M.style.transition = "left 1.6s linear, bottom 1.6s linear, opacity 1.6s";
+      P.classList.add("walking"); M.classList.add("walking");
+      P.style.left = "47%"; M.style.left = "53%"; P.style.bottom = M.style.bottom = "13%"; P.style.opacity = M.style.opacity = "0";
+      await sleep(1700);
+      room.classList.add("done");
+      if (!has("visited", "journey")) { state.visited.push("journey"); save(); updateProgress(); }
+    } catch (e) { if (e !== "stop") throw e; }
+  }
+
+  /* ---------------- THE BASKETBALL COURT ---------------- */
+  let courtAnim = null;
+  RENDER.court = room => {
+    const C = K.court;
+    room.innerHTML = `
+      ${backBar(C.title, C.subtitle)}
+      <p class="room-lede">${esc(C.lede)}</p>
+      <div class="stage court-stage" id="cStage" role="button" aria-label="Basketball court. Tap to shoot.">
+        <div class="scene sc-court on">${hoopHTML}</div>
+        <div class="court-msg" id="cMsg" aria-live="polite"><b>SWISH!</b><p></p></div>
+      </div>
+      <div class="court-hud">
+        <div class="meter" aria-hidden="true"><span class="zone"></span><span class="needle"></span></div>
+        <button class="btn-royal small" id="cShoot">Shoot! 🏀</button>
+        <span class="court-score" id="cScore">Baskets: 0</span>
+      </div>
+      <p class="court-tip">Tap “Shoot!” (or the court) when the white line is inside the green zone.</p>
+      ${nextRoomLink("portraits", "Continue to the Hall of Portraits")}`;
+
+    const stage = $("#cStage", room), sc = $(".sc-court", room);
+    const M = Chars.make("motu", "with-ball"), P = Chars.make("pingu");
+    const mob = () => window.innerWidth < 760;
+    M.style.left = (mob() ? 34 : 32) + "%"; M.style.bottom = "6%";
+    P.style.left = (mob() ? 12 : 12) + "%"; P.style.bottom = "6%";
+    sc.append(P, M);
+    const zone = $(".zone", room), needle = $(".needle", room), msg = $("#cMsg", room);
+    let zLeft = 40, zW = 22, misses = 0, score = 0, msgI = 0, busy = false, needleV = 0;
+    const setZone = () => { zW = Math.min(40, 22 + misses * 5); zLeft = 18 + Math.random() * (64 - zW); zone.style.left = zLeft + "%"; zone.style.width = zW + "%"; };
+    setZone();
+    room._meter = () => {
+      cancelAnimationFrame(courtAnim);
+      const t0 = performance.now();
+      const tick = now => { needleV = 50 + 50 * Math.sin((now - t0) * 0.0031); needle.style.left = needleV + "%"; courtAnim = requestAnimationFrame(tick); };
+      courtAnim = requestAnimationFrame(tick);
+    };
+    const talk = (c, text) => { const b = $(".bubble", c); b.textContent = text; b.classList.add("show"); clearTimeout(c._t); c._t = setTimeout(() => b.classList.remove("show"), 1800); };
+
+    async function shoot() {
+      if (busy) return; busy = true;
+      const hit = needleV >= zLeft && needleV <= zLeft + zW;
+      const start = handPos(stage, M, "r");
+      M.classList.remove("with-ball"); M.classList.add("shoot"); sfx.click();
+      const ball = document.createElement("div"); ball.className = "ball"; ball.innerHTML = Chars.ballSVG; sc.appendChild(ball);
+      const rim = rimPos(stage);
+      try {
+        if (hit) {
+          await arc(ball, start.x, start.y + 4, rim.x, rim.y + 2, 30, 950);
+          $(".hoop", sc).classList.remove("swish"); void sc.offsetWidth; $(".hoop", sc).classList.add("swish"); sfx.splash();
+          await arc(ball, rim.x, rim.y + 2, rim.x, 7, 0, 480);
+          score++; misses = 0;
+          $("#cScore", room).textContent = "Baskets: " + score;
+          M.classList.add("cheer"); P.classList.add("cheer");
+          talk(P, K.court.cheers[(score - 1) % K.court.cheers.length]);
+          popHearts(stage, rim.x - 10, 40, 7); sfx.chime();
+          $("p", msg).textContent = K.court.messages[msgI++ % K.court.messages.length];
+          msg.classList.add("show");
+          discover("basket");
+          setTimeout(() => { msg.classList.remove("show"); M.classList.remove("cheer"); P.classList.remove("cheer"); }, 3600);
+        } else {
+          await arc(ball, start.x, start.y + 4, rim.x - 4, rim.y + 3, 28, 900);
+          sfx.lock();
+          await arc(ball, rim.x - 4, rim.y + 3, rim.x - 22, 7, 10, 700);
+          misses++;
+          talk(P, K.court.misses[(misses - 1) % K.court.misses.length]);
+        }
+      } finally {
+        ball.remove();
+        M.classList.remove("shoot");
+        setTimeout(() => { M.classList.add("with-ball"); setZone(); busy = false; }, hit ? 900 : 300);
+      }
+    }
+    $("#cShoot", room).addEventListener("click", e => { e.stopPropagation(); shoot(); });
+    stage.addEventListener("click", shoot);
+    document.addEventListener("keydown", e => { if (current === "court" && (e.code === "Space" || e.key === "Enter") && !e.target.closest("button")) { e.preventDefault(); shoot(); } });
+  };
+  ENTER.court = room => room._meter();
+  leaveHooks.court = () => cancelAnimationFrame(courtAnim);
+
+  /* ---------------- Companions that follow her around ---------------- */
+  const buddies = document.createElement("div");
+  buddies.className = "buddies"; buddies.setAttribute("aria-hidden", "true");
+  const bP = Chars.make("pingu"), bM = Chars.make("motu");
+  buddies.append(bP, bM);
+  document.body.appendChild(buddies);
+  let buddyTimer, buddyRun = 0;
+  async function buddyTalk(lines, run) {
+    for (const [who, text] of lines) {
+      if (run !== buddyRun) return;
+      const c = who === "motu" ? bM : bP, b = $(".bubble", c);
+      b.textContent = text; b.classList.add("show");
+      await wait(2700); b.classList.remove("show"); await wait(260);
+    }
+  }
+  function buddiesEnter(id) {
+    const run = ++buddyRun;
+    $$(".bubble", buddies).forEach(b => b.classList.remove("show"));
+    if (["entrance", "journey", "court"].includes(id)) return;
+    buddies.classList.remove("in"); void buddies.offsetWidth;
+    bP.classList.add("walking"); bM.classList.add("walking");
+    bM.classList.remove("cheer");
+    buddies.classList.add("in");
+    clearTimeout(buddyTimer);
+    buddyTimer = setTimeout(() => {
+      bP.classList.remove("walking"); bM.classList.remove("walking");
+      if (id === "throne" && allSecrets()) bM.classList.add("cheer");
+      const lines = K.buddies && K.buddies.rooms[id];
+      if (lines) buddyTalk(lines, run);
+    }, reduceMotion ? 50 : 1650);
+  }
+  [[bP, "pingu"], [bM, "motu"]].forEach(([c, who]) => c.addEventListener("click", () => {
+    const list = K.buddies.random[who], b = $(".bubble", c);
+    buddyRun++;
+    b.textContent = list[Math.floor(Math.random() * list.length)]; b.classList.add("show");
+    c.classList.add("cheer"); tone(who === "motu" ? 1320 : 990, 0, 0.18, 0.03, "triangle");
+    const r = c.getBoundingClientRect(); burst(r.left + r.width / 2, r.top + 10, 8, ["#ff7aa2", "#f6dc8a"]);
+    clearTimeout(c._t); c._t = setTimeout(() => { b.classList.remove("show"); c.classList.remove("cheer"); }, 2200);
+  }));
+
+  // tiny walkers inside the transition veil
+  $("#veilWalk").append(Chars.make("pingu", "walking"), Chars.make("motu", "walking"));
+
+  /* ---------------- Scroll reveals across the museum ---------------- */
+  const REVEAL = ".room-head, .room-lede, .string-row, .np-lead, .np-article, .np-brief, .np-classifieds, .np-presses, .id-stage, .book-stage, .museum-note, .room-foot, .sealed-door, .court-hud, .map-wrap, .well-stage";
+  function setupReveals(room) {
+    const els = $$(REVEAL, room).filter(el => !el.classList.contains("reveal"));
+    if (!els.length) return;
+    if (!("IntersectionObserver" in window) || reduceMotion) return;
+    els.forEach((el, i) => { el.classList.add("reveal"); el.style.transitionDelay = Math.min(i, 5) * 0.08 + "s"; });
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { root: room, threshold: 0.08 });
+    els.forEach(el => io.observe(el));
+  }
+  leaveHooks.letter = () => document.body.classList.remove("reading");
 
   /* ------------------------------------------------------------------
      BOOT
