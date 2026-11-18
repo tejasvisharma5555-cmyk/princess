@@ -76,9 +76,9 @@
   /* ------------------------------------------------------------------
      SHARED HELPERS
      ------------------------------------------------------------------ */
-  function photo(src, alt, cls = "") {
+  function photo(src, alt, cls = "", pos = "") {
     if (!src) return `<div class="photo ph ${cls}" role="img" aria-label="${esc(alt)}"></div>`;
-    return `<div class="photo ${cls}"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"></div>`;
+    return `<div class="photo ${cls}"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" decoding="async"${pos ? ` style="object-position:${esc(pos)}"` : ""}></div>`;
   }
   // Missing photos gracefully become elegant placeholders
   document.addEventListener("error", e => {
@@ -355,7 +355,7 @@
           <figure class="pframe ${shapes[i % shapes.length]} ${p.hidesKey ? "askew" : ""}" style="--i:${i}">
             <div class="pframe-light" aria-hidden="true"></div>
             <button class="pframe-gilt" data-portrait="${i}" aria-label="View ${esc(p.title)}">
-              ${photo(p.src, p.title)}
+              ${photo(p.src, p.title, "", p.pos)}
             </button>
             ${p.hidesKey ? `<button class="hidden-key ${state.hasKey ? "taken" : ""}" id="hiddenKey" aria-label="Something golden glints behind the frame"><svg viewBox="0 0 48 24"><use href="#key-shape"/></svg></button>` : ""}
             <figcaption class="plaque"><b>${esc(p.title)}</b><span>${esc(p.caption)}</span></figcaption>
@@ -391,7 +391,7 @@
 
   function openLightbox(src, title, caption) {
     const lb = $("#lightbox");
-    $("#lbMedia").innerHTML = photo(src, title);
+    $("#lbMedia").innerHTML = photo(src, title, "lb-photo");
     $("#lbTitle").textContent = title;
     $("#lbCaption").textContent = caption;
     lb.hidden = false;
@@ -417,7 +417,7 @@
               <button class="polaroid" style="--r:${[-5, 3, -2, 6, -4, 2][i % 6]}deg;--d:${(i % 4) * 0.4}s" aria-label="Flip photo: ${esc(m.front)}">
                 <span class="pin" aria-hidden="true"></span>
                 <span class="pol-inner">
-                  <span class="pol-front">${photo(m.src, m.front)}<span class="pol-cap">${esc(m.front)}</span></span>
+                  <span class="pol-front">${photo(m.src, m.front, "", m.pos)}<span class="pol-cap">${esc(m.front)}</span></span>
                   <span class="pol-back"><span>${esc(m.back)}</span><small>♡</small></span>
                 </span>
               </button>`; }).join("")}
@@ -437,7 +437,7 @@
           <li class="chron-item ${i % 2 ? "right" : "left"}">
             <div class="chron-node" aria-hidden="true">${icon(i === K.chronicles.length - 1 ? "heart" : "crown")}</div>
             <article class="chron-card">
-              ${photo(c.src, c.title, "chron-photo")}
+              ${photo(c.src, c.title, "chron-photo", c.pos)}
               <div class="chron-body">
                 <p class="chron-meta">${esc(c.chapter)} · <em>${esc(c.date)}</em></p>
                 <h2>${esc(c.title)}</h2>
@@ -481,8 +481,8 @@
           <div class="np-rule thin"></div>
           <div class="np-grid">
             <section class="np-lead">
-              ${photo(K.portraits[0] && K.portraits[0].src, "Princess Muskan", "np-photo")}
-              <p class="np-photo-cap">ABOVE: Her Royal Highness, moments before rendering the kingdom speechless. (Royal Photographer, who has since retired, satisfied.)</p>
+              ${photo(N.photo, "Princess Muskan", "np-photo", N.photoPos)}
+              <p class="np-photo-cap">${esc(N.photoCaption)}</p>
               <h3>${esc(N.lead.title)}</h3>
               <div class="np-cols">${N.lead.body.map((p, i) => `<p class="${i === 0 ? "dropcap" : ""}">${esc(p)}</p>`).join("")}</div>
             </section>
@@ -663,7 +663,7 @@
               <span class="id-guilloche" aria-hidden="true"></span>
               <span class="id-header"><svg viewBox="0 0 64 64" aria-hidden="true"><use href="#crown"/></svg><span><b>Royal Identification</b><small>${esc(C.kingdom)}</small></span><span class="id-no">${esc(C.number)}</span></span>
               <span class="id-body">
-                <span class="id-photo">${photo(C.photo, C.name)}<span class="id-photo-stamp" aria-hidden="true">VERIFIED<br>ADORABLE</span></span>
+                <span class="id-photo">${photo(C.photo, C.name, "", C.photoPos)}<span class="id-photo-stamp" aria-hidden="true">VERIFIED<br>ADORABLE</span></span>
                 <span class="id-fields">
                   <span class="id-name">${esc(C.name)}</span>
                   <span class="id-f"><small>Royal Title</small>${esc(C.title)}</span>
@@ -914,7 +914,8 @@
               <section class="ll-sec" data-sec="feelings">${paras(L.feelings)}</section>
             </div>
             <p class="ll-closing">${esc(L.closing)}</p>
-            <p class="ll-sign">${esc(L.signature)}</p>
+            <p class="ll-sign">${esc(L.signature)}${L.signatureSub ? `<small>${esc(L.signatureSub)}</small>` : ""}</p>
+            ${L.photo ? `<figure class="ll-photo">${photo(L.photo, L.photoCaption || "Us", "", "50% 30%")}<figcaption>${esc(L.photoCaption || "")}</figcaption></figure>` : ""}
             <div class="ll-actions">
               <button class="btn-ghost" id="refold">Fold the letter away</button>
               <button class="btn-ghost" data-go="map">Back to the Royal Map</button>
@@ -956,7 +957,7 @@
       await wait(1000);
       room.classList.add("reading");
       letter.classList.add("unfold");
-      $$(".ll-body p, .ll-salute, .ll-closing, .ll-sign, .ll-orn", room).forEach((p, i) => p.style.setProperty("--d", (1.4 + i * 0.35) + "s"));
+      $$(".ll-body p, .ll-salute, .ll-closing, .ll-sign, .ll-orn, .ll-photo", room).forEach((p, i) => p.style.setProperty("--d", (1.4 + i * 0.35) + "s"));
       discover("letter");
     });
     $("#refold", room).addEventListener("click", () => {

@@ -12,13 +12,15 @@
 window.KINGDOM = {
 
   princessName: "Muskan",
-  kingName: "Your King",              // ✎ how you sign things (e.g. "Your Rohan")
+  kingName: "Pingu",                  // what she calls him
+  kingRealName: "Tejasvi",
+  nickname: "Motu",                   // what he calls her (sometimes 😄)
 
   /* ---------------------------------------------------------------
      THE GRAND ENTRANCE
      --------------------------------------------------------------- */
   entrance: {
-    eyebrow: "Est. the day she first smiled",
+    eyebrow: "Est. the day Pingu asked her to play basketball",
     title: "The Royal Museum of Her Kingdom",
     dedication: "Built stone by stone, frame by frame, for Her Royal Highness",
     name: "Princess Muskan",
@@ -30,26 +32,26 @@ window.KINGDOM = {
      The frame marked  hidesKey: true  is the one hiding the golden key.
      --------------------------------------------------------------- */
   portraits: [
-    { src: "assets/photos/portrait-1.jpg", title: "The Princess, Radiant",       caption: "Oil on canvas could never. The museum tried. The museum failed." },
-    { src: "assets/photos/portrait-2.jpg", title: "Her Highness at Golden Hour", caption: "The sun set early that day out of pure embarrassment." },
-    { src: "assets/photos/portrait-3.jpg", title: "The Famous Smile",            caption: "Insured by the kingdom for an amount that does not exist." },
-    { src: "assets/photos/portrait-4.jpg", title: "Study in Mischief",           caption: "Moments before she said something that made the king laugh for ten minutes." },
-    { src: "assets/photos/portrait-5.jpg", title: "Portrait No. 5",              caption: "The artist insisted something precious be kept safe behind this frame.", hidesKey: true },
-    { src: "assets/photos/portrait-6.jpg", title: "The One and Only",            caption: "Visitors are asked not to stare for more than four hours." }
+    { src: "assets/photos/portrait-1.jpg", title: "Her Highness at Golden Hour", caption: "The mountains came all this way just to stand behind her. They still look underdressed.", pos: "50% 40%" },
+    { src: "assets/photos/portrait-2.jpg", title: "The Princess, Radiant",       caption: "Even the hearts floated up to crown her. They knew.", pos: "50% 35%" },
+    { src: "assets/photos/portrait-3.jpg", title: "The Famous Smile",            caption: "Chin on hand, sun on face, Pingu completely defeated. Insured for an amount that does not exist.", pos: "50% 60%" },
+    { src: "assets/photos/portrait-4.jpg", title: "The Royal Telephone Box",     caption: "The only call that mattered took Pingu 1.5 years to make. Worth every ring.", pos: "50% 60%" },
+    { src: "assets/photos/portrait-5.jpg", title: "Portrait No. 5",              caption: "The artist insisted something precious be kept safe behind this frame.", hidesKey: true, pos: "38% 50%" },
+    { src: "assets/photos/portrait-6.jpg", title: "The One and Only",            caption: "Eyes closed, hearts everywhere. Visitors are asked not to stare for more than four hours.", pos: "50% 30%" }
   ],
 
   /* ---------------------------------------------------------------
      GALLERY OF LITTLE MOMENTS  (polaroids on strings — click to flip)
      --------------------------------------------------------------- */
   moments: [
-    { src: "assets/photos/moment-1.jpg", front: "that random tuesday",   back: "Nothing happened that day. You were there, so it was perfect anyway." },
-    { src: "assets/photos/moment-2.jpg", front: "your 'thinking' face",  back: "You do this tiny thing with your eyebrows. I have never recovered." },
-    { src: "assets/photos/moment-3.jpg", front: "food > everything",     back: "The way you light up when the food arrives is my favourite show." },
-    { src: "assets/photos/moment-4.jpg", front: "mid-laugh",             back: "If I could bottle one sound in the world, it would be this one." },
-    { src: "assets/photos/moment-5.jpg", front: "us, being silly",       back: "Proof that the king is only cool when you're not around." },
-    { src: "assets/photos/moment-6.jpg", front: "the sleepy princess",   back: "Five more minutes, she said. It was forty. Worth it." },
-    { src: "assets/photos/moment-7.jpg", front: "that outfit though",    back: "The kingdom declared a public holiday the moment you walked in." },
-    { src: "assets/photos/moment-8.jpg", front: "my favourite view",     back: "Not the scenery. You. It was always you." }
+    { src: "assets/photos/moment-1.jpg", front: "diwali, us 🪔",          back: "Diyas, fairy lights, and you leaning into me. Best festival of my life.", pos: "50% 30%" },
+    { src: "assets/photos/moment-2.jpg", front: "head on my shoulder",   back: "You put your head on my shoulder in the middle of a shop and I forgot what we came to buy.", pos: "50% 40%" },
+    { src: "assets/photos/moment-3.jpg", front: "late night, us",        back: "Bad lighting. Sleepy faces. One of my favourite photos ever.", pos: "50% 50%" },
+    { src: "assets/photos/moment-4.jpg", front: "pingu & motu",          back: "Leather jacket princess and her very lucky Pingu.", pos: "50% 50%" },
+    { src: "assets/photos/moment-5.jpg", front: "just us 🤍",            back: "Some moments are just ours. This is one of them.", pos: "50% 40%" },
+    { src: "assets/photos/moment-6.jpg", front: "your 'thinking' face",  back: "No filter, messy hair, not even trying — and still the prettiest person I know.", pos: "50% 30%" },
+    { src: "assets/photos/moment-7.jpg", front: "motu, unbothered",      back: "Specs on, zero interest in my nonsense. Absolutely iconic. I love this version of you too.", pos: "50% 50%" },
+    { src: "assets/photos/moment-8.jpg", front: "our little world",      back: "\"너와 나, 그리고 우리의 작은 세상\" — you and me, and our little world. ♡", pos: "50% 40%" }
   ],
 
   /* ---------------------------------------------------------------
@@ -57,11 +59,11 @@ window.KINGDOM = {
      ✎ Replace with your real chapters, dates and photos.
      --------------------------------------------------------------- */
   chronicles: [
-    { chapter: "Chapter I",   date: "Once upon a time",     title: "The Kingdom Begins",          src: "assets/photos/chronicle-1.jpg", text: "There was a day — an ordinary day, the history books will insist — when a girl named Muskan walked into my life. Nobody blew a trumpet. Nobody rolled out a carpet. But somewhere, quietly, a kingdom was founded." },
-    { chapter: "Chapter II",  date: "Soon after",           title: "The First Long Conversation", src: "assets/photos/chronicle-2.jpg", text: "We talked until the hours stopped making sense. I remember thinking: oh no. Oh no, I'm going to think about this person all the time now. (The royal astronomers confirm: I was correct.)" },
-    { chapter: "Chapter III", date: "The middle chapters",  title: "Becoming Us",                 src: "assets/photos/chronicle-3.jpg", text: "Inside jokes. Shared playlists. Food stolen off my plate with zero remorse. Somewhere along the way, 'you and me' quietly became 'us', and everything got a little warmer." },
-    { chapter: "Chapter IV",  date: "The hard days",        title: "Weathering Storms",           src: "assets/photos/chronicle-4.jpg", text: "Not every page of a kingdom's story is golden. But every storm taught me the same lesson: I would rather work through anything with you than have an easy day with anyone else." },
-    { chapter: "Chapter V",   date: "Today",                title: "The Kingdom, Now",            src: "assets/photos/chronicle-5.jpg", text: "And here we are. A whole museum, built for one person — because one person deserved a whole museum. The story is still being written, Your Highness. I can't wait to read the next chapter with you." }
+    { chapter: "Chapter I",   date: "1.5 years of silence", title: "Classmates Who Never Spoke",  src: "assets/photos/portrait-4.jpg", pos: "50% 62%", text: "For a year and a half, we sat in the same classroom. Same teachers, same bells, same boring lectures — and not a single word between us. Somewhere in that room was the girl who would become my whole world, and I had no idea. The history books call this era 'The Great Wasted Time'." },
+    { chapter: "Chapter II",  date: "The day it began",     title: "The Basketball Invitation",   src: "assets/photos/moment-4.jpg",   pos: "50% 45%", text: "And then, one day, Pingu found his courage and asked a simple question: 'Want to play basketball?' Royal historians agree it was the greatest assist ever made. I don't even remember who won the game. I just remember that it was the start of us." },
+    { chapter: "Chapter III", date: "Becoming us",          title: "Pingu & Motu",                src: "assets/photos/chronicle-3.jpg", pos: "50% 45%", text: "Somewhere along the way, I became 'Pingu' and you became my 'Motu' (said with love, and only sometimes, and always followed by running away). Inside jokes, shopping trips, mirror selfies, food stolen off my plate with zero remorse — 'you and me' quietly became 'us'." },
+    { chapter: "Chapter IV",  date: "Late nights",          title: "Weathering Storms",           src: "assets/photos/moment-3.jpg",   pos: "50% 50%", text: "Not every page of a kingdom's story is golden. There were hard days and long nights. But every storm taught me the same lesson: I would rather work through anything with you than have an easy day with anyone else." },
+    { chapter: "Chapter V",   date: "Today",                title: "The Kingdom, Now",            src: "assets/photos/moment-1.jpg",   pos: "50% 30%", text: "From two strangers in the same classroom to Diwali lights and your head on my shoulder. A whole museum, built for one person — because one person deserved a whole museum. The story is still being written, Muskan. I can't wait to read the next chapter with you." }
   ],
 
   /* ---------------------------------------------------------------
@@ -72,6 +74,9 @@ window.KINGDOM = {
     motto: "All the News That's Fit to Adore",
     volume: "Vol. ∞ · No. 1",
     price: "Price: One Smile",
+    photo: "assets/photos/moment-1.jpg",
+    photoPos: "50% 32%",
+    photoCaption: "ABOVE: Her Royal Highness at the Diwali celebrations, accompanied by one visibly smitten Pingu. (Royal Photographer, who has since retired, satisfied.)",
     headline: "PRINCESS MUSKAN ONCE AGAIN LEAVES HER KINGDOM SPEECHLESS!",
     subhead: "Citizens report weak knees, involuntary grinning, and a sudden urge to write poetry. Royal physicians say there is no cure, and frankly, nobody wants one.",
     lead: {
@@ -96,18 +101,20 @@ window.KINGDOM = {
     briefs: [
       { title: "WEATHER", body: "Forecast: 100% chance of her being adorable. Scattered giggles in the afternoon. Warm cuddle-front moving in by evening." },
       { title: "MARKETS", body: "Hugs up 300%. Bad days down to an all-time low. Analysts credit one (1) princess." },
-      { title: "SPORTS", body: "Princess wins argument she started, defending champion title for the 900th year running." }
+      { title: "SPORTS", body: "ARCHIVES: After 1.5 years of silence, a local boy named Pingu invited a classmate to play basketball. Experts now call it the greatest assist in recorded history." }
     ],
     classifieds: [
-      "WANTED: More hours in the day to spend with the Princess. Will trade sleep.",
+      "WANTED: More hours in the day to spend with the Princess. Will trade sleep. Contact: Pingu.",
       "LOST: One small star — the brightest in the sky, glowing rose-gold and shaped like a tiny crown. Last seen in the HALL OF A THOUSAND STARS, hiding among the ordinary ones. Finder will know it when they see it. ✦",
-      "FOR SALE: King's hoodie. Just kidding. Princess already took it.",
+      "FOR SALE: Pingu's hoodie. Just kidding. Motu already took it.",
       "NOTICE: The royal snack cupboard has been restocked. Princess has first pick, as per Article 5."
     ],
     extraHeadlines: [
       "Princess Says 'Hmm' — Kingdom Holds Breath",
       "Royal Bakery Reports Record Sales of Muskan Cake",
-      "King Caught Smiling at Phone Again; 'It's Her,' Confirm Sources",
+      "Pingu Caught Smiling at Phone Again; 'It's Her,' Confirm Sources",
+      "Pingu Calls Princess 'Motu', Immediately Flees the Kingdom",
+      "Basketball Court Where It All Began Declared National Monument",
       "Princess Wears New Outfit; Fashion Industry Collapses",
       "Kingdom's Rivers Now Flowing Slightly Faster Just to See Her",
       "Princess Sends 'hehe'; King Hospitalised With Happiness",
@@ -146,6 +153,9 @@ window.KINGDOM = {
       "The way you dance when you think nobody's watching.",
       "How you make me want to be a better person.",
       "That you chose me. I still can't believe my luck.",
+      "That you said yes to a random basketball game.",
+      "The way you say 'Pingu' like it's the most normal name in the world.",
+      "How you lean your head on my shoulder anywhere — even in the middle of a shop.",
       "Because there is only one you, and the world is brighter for it."
     ],
     secret: "You found the crown star. Of all the lights in this sky, it was always going to be you who found it — because you're the one who taught me what shining looks like. ✦"
@@ -155,7 +165,8 @@ window.KINGDOM = {
      HER ROYAL IDENTITY CARD  👑
      --------------------------------------------------------------- */
   idCard: {
-    photo: "assets/photos/id-photo.jpg",
+    photo: "assets/photos/portrait-2.jpg",
+    photoPos: "50% 30%",
     name: "Princess Muskan",
     title: "Her Majesty, The One and Only",
     kingdom: "The Kingdom of Love",
@@ -164,7 +175,7 @@ window.KINGDOM = {
     privileges: "Unlimited cuddles, unlimited attention, and the right to annoy the king",
     issuedBy: "The Royal Museum of Her Kingdom",
     number: "No. MUSKAN-∞-001",
-    issued: "The day she first smiled",
+    issued: "The day of the basketball invite",
     expires: "Never. Not even a little.",
     back: {
       heading: "Terms & Conditions of Royalty",
@@ -175,7 +186,7 @@ window.KINGDOM = {
         "Pouting by the holder is to be treated as a national emergency.",
         "This card cannot be revoked, cancelled, or argued with."
       ],
-      found: "IF FOUND: Return holder to the King immediately. Reward: unlimited hugs.",
+      found: "IF FOUND: Return holder to Pingu immediately. Reward: unlimited hugs.",
       warning: "⚠ WARNING: Excessive cuteness. Handle with care."
     }
   },
@@ -196,9 +207,10 @@ window.KINGDOM = {
       { rule: "A princess saying 'I'm fine' shall be investigated.", note: "By the Royal Detective (the king) with snacks, patience and hugs.", illo: "glass" },
       { rule: "The princess wins every argument. Retroactively.", note: "Including arguments she has not started yet.", illo: "trophy" },
       { rule: "Cold hands may be warmed on the king at any hour.", note: "The king may not flinch. The king will flinch. This is forgiven.", illo: "hand" },
-      { rule: "The princess always gets the best seat, the blanket and the last bite.", note: "This law predates the kingdom itself.", illo: "crown" }
+      { rule: "The princess may call the king 'Pingu' anywhere, anytime, in front of anyone.", note: "The king may say 'Motu' only with love, only sometimes, and only with a head start.", illo: "smile" },
+      { rule: "The princess always gets the best seat, the blanket and the last bite.", note: "This law predates the kingdom itself (and the basketball game).", illo: "crown" }
     ],
-    closing: "Signed, sealed and lovingly enforced by the King."
+    closing: "Signed, sealed and lovingly enforced by Pingu, King of the Kingdom of Love."
   },
 
   /* ---------------------------------------------------------------
@@ -232,13 +244,14 @@ window.KINGDOM = {
     salutation: "My dearest Muskan,",
 
     opening: [
+      "Do you ever think about how we sat in the same classroom for a year and a half and never said a single word to each other? I think about it all the time. All those days you were right there, and I didn't know yet. And then I asked you to play basketball — the bravest, luckiest, best question I have ever asked.",
       "I built you an entire museum, and still, this is the room I was most nervous about. Everything outside these walls is a celebration. This room is just me — no jokes, no headlines, no royal decrees. Just the things I don't always know how to say out loud."
     ],
 
     // ✎ MEMORIES — replace with real moments only the two of you know
     memories: [
       "I keep thinking about the little moments. The first time you laughed at something I said and I realised I'd spend the rest of my life trying to hear that sound again. The late-night conversations that made the clock feel irrelevant. The ordinary days that became my favourite days, simply because you were in them.",
-      "I don't remember what we ate, or what the weather was, or what time it got. I just remember you."
+      "Diwali with you under the fairy lights. Your head on my shoulder in that shop. Late nights with bad lighting and sleepy faces. I don't remember what we ate, or what the weather was, or what time it got. I just remember you."
     ],
 
     // ✎ APOLOGIES — the honest part
@@ -255,11 +268,14 @@ window.KINGDOM = {
     // ✎ FEELINGS — the heart of it
     feelings: [
       "Here is the truth, Muskan: you make my world softer and brighter and more worth it. When something good happens, you're the first person I want to tell. When something goes wrong, you're the only person I want to talk to. You are my comfort and my favourite adventure all at once.",
-      "If this whole museum crumbled tomorrow, this one thing would still be standing: I love you. Completely, stubbornly, and more every day."
+      "If this whole museum crumbled tomorrow, this one thing would still be standing: I love you, Muskan. My princess, my Motu, my favourite person. Completely, stubbornly, and more every day."
     ],
 
     closing: "Forever your king, and forever yours,",
-    signature: "Your King"   // ✎ your name or nickname
+    signature: "Your Pingu",
+    signatureSub: "(Tejasvi)",
+    photo: "assets/photos/moment-1.jpg",   // pinned to the bottom of the letter
+    photoCaption: "us ♡"
   },
 
   /* ---------------------------------------------------------------
@@ -273,9 +289,9 @@ window.KINGDOM = {
       "But the greatest secret of this museum was never hidden in a frame, a fountain or a sky.",
       "It's that this entire kingdom only exists because of her.",
       "Every gallery is a love letter. Every room is a thank-you. Every star is a promise.",
-      "Long live the Princess. Long live the one who made a king out of an ordinary heart."
+      "Long live Princess Muskan. Long live the girl who said yes to one basketball game and made a king out of an ordinary Pingu."
     ],
-    signature: "— With all my love, now and always"
+    signature: "— With all my love, now and always,"
   },
 
   /* ---------------------------------------------------------------

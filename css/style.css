@@ -210,6 +210,8 @@ body[data-room="map"] .hud-map { opacity: .0; pointer-events: none; }
 .lightbox.show .lb-figure { transform: none; }
 .lb-frame { padding: 14px; background: var(--gold-grad); box-shadow: 0 30px 80px rgba(0,0,0,.7); display: inline-block; }
 .lb-media .photo { width: min(78vw, 560px); height: min(66vh, 680px); }
+.lb-media .photo.lb-photo:not(.ph) { width: auto; height: auto; background: none; }
+.lb-media .photo.lb-photo img { width: auto; height: auto; max-width: min(80vw, 900px); max-height: 68vh; object-fit: contain; }
 .lb-figure h3 { font-family: var(--display); color: var(--gold-hi); margin: 18px 0 4px; letter-spacing: .06em; }
 .lb-figure p { margin: 0 auto; font-style: italic; opacity: .8; max-width: 520px; }
 
@@ -795,6 +797,12 @@ body[data-room="map"] .hud-map { opacity: .0; pointer-events: none; }
 .ll-sign { font-family: var(--script); font-size: clamp(40px, 7vw, 58px); color: #6e0f1d; margin: 0; line-height: 1.2; }
 .love-letter.unfold .ll-body p, .love-letter.unfold .ll-salute, .love-letter.unfold .ll-closing, .love-letter.unfold .ll-sign, .love-letter.unfold .ll-orn { animation: inkIn 1.4s var(--ease) both; animation-delay: var(--d, 1.4s); }
 @keyframes inkIn { from { opacity: 0; filter: blur(4px); transform: translateY(8px); } }
+.ll-sign small { display: block; font-family: var(--serif); font-style: italic; font-size: 18px; color: #6b4a22; margin-top: -4px; }
+.ll-photo { margin: 28px 0 0 auto; width: 190px; padding: 10px 10px 0; background: #fff; box-shadow: 0 10px 24px rgba(60,40,20,.3); transform: rotate(4deg); position: relative; }
+.ll-photo::before { content: ""; position: absolute; left: 50%; top: -12px; width: 80px; height: 24px; transform: translateX(-50%) rotate(-3deg); background: rgba(240,225,180,.75); box-shadow: 0 1px 2px rgba(0,0,0,.1); }
+.ll-photo .photo { aspect-ratio: 1; }
+.ll-photo figcaption { font-family: var(--hand); font-size: 22px; text-align: center; color: #6e0f1d; padding: 4px 0 8px; }
+.love-letter.unfold .ll-photo { animation: inkIn 1.4s var(--ease) both; animation-delay: var(--d, 1.4s); }
 .ll-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 40px; }
 .ll-actions .btn-ghost { color: #6e0f1d; border-color: rgba(110,15,29,.4); background: transparent; backdrop-filter: none; }
 
