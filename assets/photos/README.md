@@ -7,6 +7,7 @@ Drop her photos in this folder using these names (or change the names in `js/con
 | `portrait-1.jpg` … `portrait-6.jpg` | Hall of Portraits (portrait-1 also appears on the newspaper front page) |
 | `moment-1.jpg` … `moment-8.jpg` | Gallery of Little Moments (polaroids) |
 | `chronicle-1.jpg` … `chronicle-5.jpg` | The Royal Chronicles |
+| `first-flower.jpg` | The First Flower chapter and its polaroid |
 | `id-photo.jpg` | Her Royal Identity Card (currently uses `portrait-2.jpg`) |
 
 Portrait-shaped photos (taller than wide) look best in the portraits and ID card.

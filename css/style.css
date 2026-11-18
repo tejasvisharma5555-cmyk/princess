@@ -382,7 +382,7 @@ body[data-room="map"] .hud-map { opacity: .0; pointer-events: none; }
 .string { position: absolute; left: 0; right: 0; top: 0; width: 100%; height: 40px; }
 .string path { fill: none; stroke: #8a6a44; stroke-width: 1.4; vector-effect: non-scaling-stroke; }
 .polaroids { position: relative; display: flex; justify-content: space-around; gap: 20px; flex-wrap: wrap; }
-.polaroid { position: relative; width: min(230px, 42vw); aspect-ratio: .82; perspective: 1000px; transform-origin: 50% 0; transform: rotate(var(--r)); animation: sway 6s ease-in-out infinite; animation-delay: var(--d); margin-top: 18px; }
+.polaroid { position: relative; width: min(200px, 42vw); aspect-ratio: .82; perspective: 1000px; transform-origin: 50% 0; transform: rotate(var(--r)); animation: sway 6s ease-in-out infinite; animation-delay: var(--d); margin-top: 18px; }
 @keyframes sway { 50% { transform: rotate(calc(var(--r) * -.5)); } }
 .pin { position: absolute; left: 50%; top: -14px; width: 14px; height: 34px; transform: translateX(-50%); z-index: 3; background: linear-gradient(90deg, #b88a50, #e3c08a, #9a6e38); border-radius: 3px; box-shadow: 0 2px 4px rgba(0,0,0,.3); }
 .pol-inner { position: relative; display: block; width: 100%; height: 100%; transform-style: preserve-3d; transition: transform .8s var(--ease); }
