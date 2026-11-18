@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>The Royal Museum of Her Kingdom</title>
+  <meta name="description" content="A kingdom built to celebrate one person: Princess Muskan.">
+  <meta name="theme-color" content="#0b0710">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cpath d='M8 48 L12 20 L24 34 L32 14 L40 34 L52 20 L56 48 Z' fill='%23d4af37'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;800&family=Cinzel+Decorative:wght@700&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Great+Vibes&family=Caveat:wght@500;700&family=Old+Standard+TT:ital,wght@0,400;0,700;1,400&family=UnifrakturMaguntia&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- ============ HUD ============ -->
+  <header class="hud" aria-label="Kingdom navigation">
+    <button class="hud-btn hud-map" id="hudMap" aria-label="Return to the Royal Map">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z M9 4v14 M15 6v14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+      <span>Royal Map</span>
+    </button>
+    <div class="hud-right">
+      <div class="hud-key" id="hudKey" hidden title="You carry the Golden Key">
+        <svg viewBox="0 0 48 24" aria-hidden="true"><use href="#key-shape"/></svg>
+      </div>
+      <button class="hud-btn hud-sound" id="hudSound" aria-label="Toggle sound" aria-pressed="true">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path class="wave" d="M16 8.5a5 5 0 010 7M18.5 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+      </button>
+      <button class="hud-progress" id="hudProgress" aria-label="Kingdom exploration progress" aria-expanded="false">
+        <svg viewBox="0 0 44 44" class="ring" aria-hidden="true">
+          <circle cx="22" cy="22" r="19" class="ring-bg"/>
+          <circle cx="22" cy="22" r="19" class="ring-fg" id="ringFg"/>
+        </svg>
+        <svg viewBox="0 0 64 64" class="ring-crown" aria-hidden="true"><path d="M10 46 L13 22 L24 33 L32 16 L40 33 L51 22 L54 46 Z" fill="currentColor"/></svg>
+        <span class="hud-progress-text"><b id="progressPct">0%</b><small>explored</small></span>
+      </button>
+    </div>
+  </header>
+
+  <aside class="progress-panel" id="progressPanel" hidden aria-label="Exploration ledger">
+    <h3>The Royal Ledger</h3>
+    <p class="pp-sub">How much of her kingdom has been explored</p>
+    <div class="pp-bar"><span id="ppBar"></span></div>
+    <h4>Galleries</h4>
+    <ul id="ppRooms"></ul>
+    <h4>Secret Discoveries <small>(optional)</small></h4>
+    <ul id="ppSecrets"></ul>
+  </aside>
+
+  <!-- ============ ROOMS ============ -->
+  <main id="kingdom">
+    <section class="room room-entrance" data-room="entrance" aria-label="The Grand Entrance"></section>
+    <section class="room room-map" data-room="map" aria-label="The Royal Map"></section>
+    <section class="room room-portraits" data-room="portraits" aria-label="Hall of Portraits"></section>
+    <section class="room room-moments" data-room="moments" aria-label="Gallery of Little Moments"></section>
+    <section class="room room-chronicles" data-room="chronicles" aria-label="The Royal Chronicles"></section>
+    <section class="room room-times" data-room="times" aria-label="The Muskan Times"></section>
+    <section class="room room-stars" data-room="stars" aria-label="Hall of a Thousand Stars"></section>
+    <section class="room room-records" data-room="records" aria-label="Royal Records Office"></section>
+    <section class="room room-library" data-room="library" aria-label="The Royal Library"></section>
+    <section class="room room-garden" data-room="garden" aria-label="The Enchanted Garden"></section>
+    <section class="room room-letter" data-room="letter" aria-label="The Locked Room"></section>
+    <section class="room room-throne" data-room="throne" aria-label="The Throne Room"></section>
+  </main>
+
+  <!-- Cinematic veil used between rooms -->
+  <div class="veil" id="veil" aria-hidden="true">
+    <div class="veil-crest">
+      <svg viewBox="0 0 64 64"><path d="M10 46 L13 22 L24 33 L32 16 L40 33 L51 22 L54 46 Z" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
+      <span id="veilLabel"></span>
+    </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Portrait view">
+    <button class="lb-close" aria-label="Close">×</button>
+    <figure class="lb-figure">
+      <div class="lb-frame"><div class="lb-media" id="lbMedia"></div></div>
+      <figcaption><h3 id="lbTitle"></h3><p id="lbCaption"></p></figcaption>
+    </figure>
+  </div>
+
+  <!-- Discovery toast -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- Shared SVG symbols -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <linearGradient id="goldGrad" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#fff3c4"/><stop offset=".35" stop-color="#e6c35c"/><stop offset=".7" stop-color="#b8892a"/><stop offset="1" stop-color="#f6dc8a"/>
+      </linearGradient>
+      <symbol id="key-shape" viewBox="0 0 48 24">
+        <circle cx="10" cy="12" r="8" fill="none" stroke="url(#goldGrad)" stroke-width="3.2"/>
+        <circle cx="10" cy="12" r="3" fill="url(#goldGrad)"/>
+        <rect x="17" y="10.4" width="28" height="3.2" rx="1.2" fill="url(#goldGrad)"/>
+        <rect x="36" y="13" width="3" height="6" fill="url(#goldGrad)"/>
+        <rect x="41" y="13" width="3" height="8" fill="url(#goldGrad)"/>
+      </symbol>
+      <symbol id="crown" viewBox="0 0 64 64">
+        <path d="M10 46 L13 22 L24 33 L32 16 L40 33 L51 22 L54 46 Z" fill="url(#goldGrad)"/>
+        <rect x="10" y="47" width="44" height="6" rx="1.5" fill="url(#goldGrad)"/>
+        <circle cx="13" cy="20" r="3" fill="url(#goldGrad)"/><circle cx="32" cy="14" r="3.4" fill="url(#goldGrad)"/><circle cx="51" cy="20" r="3" fill="url(#goldGrad)"/>
+        <circle cx="32" cy="38" r="3" fill="#a3122a"/>
+      </symbol>
+      <symbol id="heart" viewBox="0 0 32 32"><path d="M16 28 C 6 20, 2 14, 4 9 C 6 4, 13 3, 16 9 C 19 3, 26 4, 28 9 C 30 14, 26 20, 16 28 Z"/></symbol>
+    </defs>
+  </svg>
+
+  <script src="js/content.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
